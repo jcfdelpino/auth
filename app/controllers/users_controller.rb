@@ -8,9 +8,9 @@ class UsersController < ApplicationController
   end
 
   def create
+       # where is password: 
+    plain_text_password = params["user"]["password"]
     @user = User.new(params["user"])
-    # where is password: 
-    plain_text_password = params["user"] ["password"]
     # line below adds encryption step --> puppies
     @user.password = BCrypt::Password.create(plain_text_password)
     @user.save

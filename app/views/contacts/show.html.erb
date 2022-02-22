@@ -8,9 +8,9 @@
 <p><a href="/companies/<%= @contact.company.id %>">Back to <%= @contact.company.name %></a></p>
 
 <h3>Sales Activity</h3>
-
+<%=if @current_user%>
 <ul>
-  <% for activity in @contact.activities %>
+  <% for activity in @contact.activities.where({user_id:@current_user.id}) %>
     <li>
       <%= activity.activity_type %>
       with <%= activity.contact.first_name %> <%= activity.contact.last_name %>
@@ -18,8 +18,10 @@
       <%= activity.note %>
     </li>
   <% end %>
+<% end %>
 </ul>
 
+<%=if @current_user%>
 <h4>New Sales Activity</h4>
 
 <%= form_with model: @activity do |form| %>
@@ -33,4 +35,5 @@
     <%= form.text_area "note" %>
   </p>
   <%= form.submit %>
+<% end %>
 <% end %>

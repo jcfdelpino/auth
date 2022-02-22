@@ -5,25 +5,21 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
     <%= stylesheet_link_tag "application" %>
   </head>
-
   <body>
-
-  <p>
-  <%= if @current_user%>
-  Welcome <%= @current_user.first_name%>
-
-  <%=else%>
-  <a href = "sessions/new"> Login </a> or
-  <a href = "/users/new"> Sign Up </a>
-  <%=end%>
-  </p>
+    <p>
+      <% if @currrent_user %>
+        Welcome <%= @currrent_user.first_name%>
+        <%= button_to "Logout", "/sessions/logout", method: :delete %>
+      <% else %>
+        <a href="/sessions/new">Login </a> or
+        <a href="/users/new">Sign up </a>
+      <% end %>
+    </p>
     <p>
       <%= flash[:notice] %>
     </p>
-
     <%= yield %>
   </body>
 </html>
